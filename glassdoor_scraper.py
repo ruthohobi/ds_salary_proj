@@ -2,7 +2,8 @@
 """
 Created on Wed Jul 29 13:34:42 2020
 
-@author: Toshiba
+@author: Kenarapfaik
+url: https://github.com/arapfaik/scraping-glassdoor-selenium
 """
 
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
@@ -182,8 +183,10 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
             #add job to jobs
 
         #Clicking on the "next page" button
-        try:
-            driver.find_element_by_xpath('.//li[@class="next"]//a').click()
+        try:    
+            next_button = driver.find_element_by_xpath('.//li[@class="next"]//a');
+            driver.execute_script("arguments[0].click;", next_button)
+            #driver.find_elements_by_xpath('.//li[@class="next"]//a').click()
         except NoSuchElementException:
             print("Scraping terminated before reaching target number of jobs. Needed {}, got {}.".format(num_jobs, len(jobs)))
             break
